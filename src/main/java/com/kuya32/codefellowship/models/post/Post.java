@@ -22,6 +22,7 @@ public class Post {
         this.createdAt = createdAt;
     }
 
+    // This makes a string of the post
     public String toString() {
         return String.format("%s\n Post made at %s", body, createdAt);
     }
