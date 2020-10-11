@@ -3,27 +3,30 @@ package com.kuya32.codefellowship.models.post;
 import com.kuya32.codefellowship.models.user.ApplicationUser;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY);
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
     @ManyToOne
     ApplicationUser applicationUser;
 
     String body;
-    Timestamp createdAt;
+    SimpleDateFormat createdAt;
 
     public Post() {};
 
-    public Post(ApplicationUser applicationUser, String body, Timestamp createdAt) {
+    public Post(ApplicationUser applicationUser, String body) {
         this.applicationUser = applicationUser;
         this.body = body;
-        this.createdAt = createdAt;
+        // Used SimpleDataFormat from https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
+        this.createdAt = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     }
 
     // This makes a string of the post
@@ -47,11 +50,11 @@ public class Post {
         this.body = body;
     }
 
-    public Timestamp getCreatedAt() {
+    public SimpleDateFormat getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(SimpleDateFormat createdAt) {
         this.createdAt = createdAt;
     }
 }

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Signup</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head"></head>
 <body>
+<header th:replace="fragments/header :: header"></header>
+<main>
     <h1>Signup Now!</h1>
 
-    <form action="newUser" method="POST">
-        <input type="text" name="username">
-        <input type="text" name="password">
-        <input type="text" name="firstname">
-        <input type="text" name="lastname">
-        <input type="text" name="dateOfBirth">
-        <input type="text" name="bio">
-        <input type="submit">
+    <form action="/signup" method="POST">
+        <legend>Sign Up Form</legend>
+        Username: <input type="text" name="username" required>
+        Password: <input type="text" name="password" required>
+        First Name: <input type="text" name="firstname">
+        Last Name: <input type="text" name="lastname">
+        Date of Birth: <input type="text" name="dateOfBirth">
+        Bio: <input type="text" name="bio">
+        <input type="submit" value="Sign Up">
     </form>
+</main>
 </body>
 </html>
