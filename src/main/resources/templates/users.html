@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <main>
+        <h1>Code Fellowship Users:</h1>
+        <div th:each="eachUser : ${allUsers}" th:if="${eachUser} != ${user}">
+            <p><span
+                    th:text="'Username: ' + ${eachUser.getUsername()} + ', Check out their '"></span><a th:href="'/user/' + ${eachUser.getId()}" th:text="'profile'"></a></p>
+        </div>
+    </main>
+</body>
+</html>

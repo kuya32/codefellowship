@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head"></head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <main>
+        <h1>My Account Profile</h1>
+        <img th:src="${user.getProfilePicUrl()}">
+        <p th:text="'Username: ' + ${user.getUsername()}"></p>
+        <p th:if="${user.getFirstname()} !=''"
+           th:text="'First Name: ' + ${user.getFirstname()}">First Name: Not Provided</p>
+        <p th:if="${user.getLastname()} !=''"
+           th:text="'Last Name: ' + ${user.getLastname()}">Last Name: Not Provided</p>
+        <p th:if="${user.getDateOfBirth()} != null"
+           th:text="'Date of Birth: ' + ${user.getDateOfBirth()}"></p>
+        <p th:if="${user.getBio()} !=''" th:text="'Bio: ' + ${user.getBio()}"></p>
+
+        <form action="/post" method="POST">
+            <legend>Add a post</legend>
+            <input type="text" name="body">
+            <input type="submit" value="Add Post">
+        </form>
+
+        <h2>My Posts:</h2>
+
+        <div th:each="post : ${user.getPosts()}">
+            <p th:text="'Posted by ' + ${user.getUsername()} + ' on ' + ${post.getCreatedAt()}"></p>
+            <p th:text="${post.getBody()}"></p>
+        </div>
+    </main>
+</body>
+</html>
