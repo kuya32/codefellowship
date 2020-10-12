@@ -21,9 +21,9 @@
         </form>
 
         <form
-                th:if="${user.getUsername()} !=${principal.getName()} and !${principalUser.getFollowing().contains(user)}" action="/nothomies" method="POST">
+                th:if="${user.getUsername()} !=${principal.getName()} and ${principalUser.getFollowing().contains(user)}" action="/nothomies" method="POST">
             <input type="hidden" name="id" th:value="${user.getId()}">
-            <input type="submit" th:value="'Follow ' + ${user.getUsername()}">
+            <input type="submit" th:value="'UnFollow ' + ${user.getUsername()}">
         </form>
 
     </main>

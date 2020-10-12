@@ -10,6 +10,15 @@
             <p th:text="'Posted by ' + ${user.getUsername()} + ' on ' + ${post.getCreatedAt()}"></p>
             <p th:text="${post.getBody()}"></p>
         </div>
+
+        <div th:each="homies : ${user.getFollowing()}">
+            <div th:each="homiesPost : ${homies.getPosts()}">
+                <p>Posted by
+                    <a th:href="'/user/' +${homies.getId()}" th:text="${homies.getUsername()}"></a>
+                    on <span th:text="${homiesPost.getCreatedAt()}"></span></p>
+                <p th:text="${homiesPost.getBody()}"></p>
+            </div>
+        </div>
     </main>
 </body>
 </html>
