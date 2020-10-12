@@ -32,7 +32,8 @@ public class ApplicationUserController {
 
     @PostMapping("/signup")
     public RedirectView signupNewUser(String username, String password, String firstname,
-                                    String lastname, String dateOfBirth, String bio, String profilePicUrl) {
+                                    String lastname, String dateOfBirth, String bio,
+                                      String profilePicUrl) throws Exception {
         System.out.println("Adding a new user!");
         password = passwordEncoder.encode(password);
         ApplicationUser newUser = new ApplicationUser(username, password, firstname, lastname,

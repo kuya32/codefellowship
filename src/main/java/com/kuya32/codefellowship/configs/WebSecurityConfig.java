@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/public/*").permitAll()
                 .antMatchers("/login", "/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -44,6 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/myprofile")
                 .and()
-                .logout();
+                .logout()
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
     }
 }
