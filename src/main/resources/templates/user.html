@@ -13,6 +13,19 @@
         <p th:if="${user.getLastname()} !=''"
            th:text="'Last Name: ' + ${user.getLastname()}">Last Name: Not Provided</p>
         <p th:if="${user.getBio()} !=''" th:text="'Bio: ' + ${user.getBio()}"></p>
+
+        <form
+                th:if="${user.getUsername()} !=${principal.getName()} and !${principalUser.getFollowing().contains(user)}" action="/homies" method="POST">
+            <input type="hidden" name="id" th:value="${user.getId()}">
+            <input type="submit" th:value="'Follow ' + ${user.getUsername()}">
+        </form>
+
+        <form
+                th:if="${user.getUsername()} !=${principal.getName()} and !${principalUser.getFollowing().contains(user)}" action="/nothomies" method="POST">
+            <input type="hidden" name="id" th:value="${user.getId()}">
+            <input type="submit" th:value="'Follow ' + ${user.getUsername()}">
+        </form>
+
     </main>
 </body>
 </html>

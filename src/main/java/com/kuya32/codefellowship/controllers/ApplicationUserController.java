@@ -81,4 +81,26 @@ public class ApplicationUserController {
         m.addAttribute("principle", principal);
         return "myprofile";
     }
+
+    @PostMapping("/homies")
+    public RedirectView followedUser(Principal principal, Long id) {
+        ApplicationUser followedUser = applicationUserRepository.getOne(id);
+        ApplicationUser sheep = applicationUserRepository.findByUsername(principal.getName());
+        followedUser.getFollower(sheep);
+        sheep.follow(followedUser);
+        applicationUserRepository.save(followedUser);
+        applicationUserRepository.save(sheep);
+        return new RedirectView("/user/" + id);
+    }
+
+    @PostMapping("/nothomies")
+    public RedirectView unfollowedUser(Principal principal, Long id) {
+        ApplicationUser unfollowedUser = applicationUserRepository.getOne(id);
+        ApplicationUser sheep = applicationUserRepository.findByUsername(principal.getName());
+        unfollowedUser.removeFollower(sheep);
+        sheep.removeFollow(unfollowedUser);
+        applicationUserRepository.save(unfollowedUser);
+        applicationUserRepository.save(sheep);
+        return new RedirectView("/user/" + id);
+    }
 }
