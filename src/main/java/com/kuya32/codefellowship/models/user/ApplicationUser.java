@@ -5,9 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -18,6 +16,17 @@ public class ApplicationUser implements UserDetails {
 
     @OneToMany(mappedBy = "applicationUser", cascade = CascadeType.ALL)
     List<Post> posts = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "homies",
+            joinColumns = {@JoinColumn(name = "sheep")},
+            inverseJoinColumns = {@JoinColumn(name = "following")}
+    )
+    Set<ApplicationUser> following = new HashSet<>();
+
+    @ManyToMany(mappedBy = "following")
+    Set<ApplicationUser> followers = new HashSet<>();
 
     private String username;
     private String password;
@@ -66,6 +75,30 @@ public class ApplicationUser implements UserDetails {
 
     public String getProfilePicUrl() {
         return profilePicUrl;
+    }
+
+    public Set<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public Set<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void follow(ApplicationUser followedUser) {
+        following.add(followedUser);
+    }
+
+    public void removeFollow(ApplicationUser unfollowedUser) {
+        following.remove(unfollowedUser);
+    }
+
+    public void getFollower(ApplicationUser sheep) {
+        followers.add(sheep);
+    }
+
+    public void removeFollower(ApplicationUser sheep) {
+        followers.remove(sheep);
     }
 
     public void setId(long id) {

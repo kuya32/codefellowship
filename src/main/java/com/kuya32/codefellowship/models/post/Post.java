@@ -4,8 +4,6 @@ import com.kuya32.codefellowship.models.user.ApplicationUser;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Entity
@@ -26,7 +24,6 @@ public class Post {
     public Post(ApplicationUser applicationUser, String body) {
         this.applicationUser = applicationUser;
         this.body = body;
-        // Used SimpleDataFormat from https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
         this.createdAt = new Date(Calendar.getInstance().getTime().getTime());
     }
 

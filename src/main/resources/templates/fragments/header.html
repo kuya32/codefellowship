@@ -4,12 +4,13 @@
         <h2>Connecting coders around the world!</h2>
     </div>
 
-    <p th:if="${principal}" th:text="'Hello, ' + ${principal.getName()} + '.'"></p>
-
     <nav th:fragment="nav">
+        <p th:if="${principal}" th:text="'Hello, ' + ${principal.getName()} + '.'"></p>
         <li><a href="/">Home</a></li>
         <li th:if="${principal}"><a href="/myprofile">My Profile</a></li>
         <li th:if="${principal}"><a href="/users">Browse Code Fellowship Users</a></li>
+        <li th:if="${principal}"><a href="/feed">Feed</a></li>
+        <li th:if="${principal}"><a href="/logout">Logout</a></li>
         <li th:unless="${principal}"><a href="/login">Login</a></li>
         <li th:unless="${principal}"><a href="/signup">Sign Up</a></li>
     </nav>
