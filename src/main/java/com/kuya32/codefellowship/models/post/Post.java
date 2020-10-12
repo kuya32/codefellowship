@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Entity
 public class Post {
@@ -18,7 +19,7 @@ public class Post {
     ApplicationUser applicationUser;
 
     String body;
-    SimpleDateFormat createdAt;
+    Date createdAt;
 
     public Post() {};
 
@@ -26,7 +27,7 @@ public class Post {
         this.applicationUser = applicationUser;
         this.body = body;
         // Used SimpleDataFormat from https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
-        this.createdAt = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        this.createdAt = new Date(Calendar.getInstance().getTime().getTime());
     }
 
     // This makes a string of the post
@@ -50,11 +51,11 @@ public class Post {
         this.body = body;
     }
 
-    public SimpleDateFormat getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(SimpleDateFormat createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 }

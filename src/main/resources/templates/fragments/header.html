@@ -4,7 +4,9 @@
         <h2>Connecting coders around the world!</h2>
     </div>
 
-    <nav>
+    <p th:if="${principal}" th:text="'Hello, ' + ${principal.getName()} + '.'"></p>
+
+    <nav th:fragment="nav">
         <li><a href="/">Home</a></li>
         <li th:if="${principal}"><a href="/myprofile">My Profile</a></li>
         <li th:if="${principal}"><a href="/users">Browse Code Fellowship Users</a></li>
